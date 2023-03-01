@@ -3,7 +3,6 @@ package src.day01;
 public class Array {
     public static void main(String[] args) {
         Integer[] matrix = new Integer[6];
-        Integer abc;
 
         //Size of the array
         System.out.printf("Size of the matrix: %d\n", matrix.length);
