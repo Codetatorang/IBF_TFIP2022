@@ -38,8 +38,6 @@ public class Client {
 
         
         Writer wr = new OutputStreamWriter(os);
-        // wr.write(line);
-        // wr.flush();
         oos.writeUTF(line);
         oos.flush();
 
