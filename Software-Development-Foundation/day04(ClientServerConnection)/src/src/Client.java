@@ -46,7 +46,7 @@ public class Client {
         Reader r = new InputStreamReader(is);
         BufferedReader br = new BufferedReader(r);
         String returnedString = br.readLine();
-        System.out.printf("your message %s is converted into %s \n: ", line, returnedString);
+        System.out.printf("your message %s is converted into %s:\n ", line, returnedString);
 
         //Close connection
         clientConn.close();
