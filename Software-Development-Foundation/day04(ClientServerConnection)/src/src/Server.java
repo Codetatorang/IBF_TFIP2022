@@ -5,6 +5,8 @@ import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -32,21 +34,24 @@ public class Server {
             // System.out.printf(">> from client: %s\n", input);
             System.out.printf(">> from client: %s\n", input);
             input = input.toUpperCase();
-            System.out.printf(">> from client: %s\n", input);
+            System.out.printf(">> to client: %s\n", input);
 
             OutputStream os = conn.getOutputStream();
-            ObjectOutputStream oos = new ObjectOutputStream(os);
+            // ObjectOutputStream oos = new ObjectOutputStream(os);
             
             // input = input.toUpperCase();
-            // OutputStream os = conn.getOutputStream();
-            // Writer w = new OutputStreamWriter(os);
-            // w.write(input);
-            // w.flush();
-            
+            // os = conn.getOutputStream();
+            Writer w = new OutputStreamWriter(os);
+            w.write(input);
+            w.flush();
+
+            // oos.writeUTF(input);
+            // oos.flush();
+
             //Close the connection
             conn.close();
             server.close();
-            oos.close();
+            // oos.close();
 
         }
     

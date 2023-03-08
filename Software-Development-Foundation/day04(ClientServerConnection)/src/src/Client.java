@@ -7,7 +7,9 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.io.Reader;
+import java.io.Writer;
 import java.net.Socket;
 
 public class Client {
@@ -23,7 +25,7 @@ public class Client {
 
         Socket clientConn = new Socket("127.0.0.1", port);
 
-        System.out.println("Connected to server on localhost:3000");
+        System.out.printf("Connected to server on localhost:%d\n", port);
 
         //Console
         Console cons = System.console();
@@ -35,19 +37,22 @@ public class Client {
         ObjectOutputStream oos = new ObjectOutputStream(os);
 
         
-        // Writer wr = new OutputStreamWriter(os);
+        Writer wr = new OutputStreamWriter(os);
         // wr.write(line);
         // wr.flush();
-        
+        oos.writeUTF(line);
+        oos.flush();
+
         // get the input stream from the server
         InputStream is = clientConn.getInputStream();
         Reader r = new InputStreamReader(is);
         BufferedReader br = new BufferedReader(r);
         String returnedString = br.readLine();
         System.out.printf("your message %s is converted into %s \n: ", line, returnedString);
-        
+
         //Close connection
         clientConn.close();
+        wr.close();
         oos.close();
     }
 }
