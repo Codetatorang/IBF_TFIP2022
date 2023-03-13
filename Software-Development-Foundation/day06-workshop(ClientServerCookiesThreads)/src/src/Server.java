@@ -1,17 +1,12 @@
 package src;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.EOFException;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class Server {
     public static void main(String[] args) throws FileNotFoundException, IOException {
@@ -26,39 +21,26 @@ public class Server {
             System.out.println("directory has been created.");
         }
 
-        Cookies cookie = new Cookies();
-        cookie.readCookieFile();
-        cookie.showCookies();
+        int port = 3000;
+        Boolean exit = false;
+        if (args.length > 0)
+            port = Integer.parseInt(args[0]);
 
-        ServerSocket ss = new ServerSocket(3000);
-        Socket s = ss.accept();
+        // enabling of threads
+        ServerSocket ss = new ServerSocket(port);
+        ExecutorService executorService = Executors.newCachedThreadPool();
 
-        try (InputStream is = s.getInputStream()) {
-            BufferedInputStream bis = new BufferedInputStream(is);
-            DataInputStream dis = new DataInputStream(bis);
-            String messageReceived = "";
+        while (!exit) {
+            System.out.println("Waiting for Connection...");
+            Socket s = ss.accept();
+            System.out.println("Connection Received...");
+            CookieClientHandler cch = new CookieClientHandler(s);
+            executorService.execute(cch);
 
-            while (!messageReceived.equals("close")) {
-                messageReceived = dis.readUTF();
-
-                if (messageReceived.equalsIgnoreCase("get-cookie")) {
-                    String cookieValue = cookie.returnCookie();
-                    System.out.println(cookieValue);
-
-                    try (OutputStream os = s.getOutputStream()) {
-                        BufferedOutputStream bos = new BufferedOutputStream(os);
-                        DataOutputStream dos = new DataOutputStream(bos);
-                        dos.writeUTF(cookieValue);
-                        dos.flush();
-                    }
-
-                }
-                
-            }
-        } catch (EOFException EX) {
-            s.close();
-            ss.close();
-            
+            if(exit)
+                s.close();
         }
+
+        ss.close();
     }
 }
