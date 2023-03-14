@@ -1,0 +1,14 @@
+.breadcrumb a{
+    color: #27b055;
+}
+
+.breadcrumb a:hover{
+    color: #C780FA;
+}
+.footer{
+    font-size: 12px;
+}
+
+.form-control{
+    background: greenyellow url();
+}
