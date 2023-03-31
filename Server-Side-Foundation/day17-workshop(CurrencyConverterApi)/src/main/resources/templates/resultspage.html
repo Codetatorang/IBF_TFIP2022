@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-th-text="${curr.baseCode + ' to ' + curr.targetCode}"></title>
+</head>
+
+<body>
+    <div>
+        <h1 data-th-text="'Currency Convert result : ' + ${curr.result}"></h1>
+        <hr>
+        <div data-th-text="${curr.baseCode + ' to ' + curr.targetCode}"></div>
+        <br>
+        <div data-th-text="'Time last update Unix:' + ${curr.timeLastUpdateUnix}"></div>
+        <div data-th-text="'Time last update Utc:' + ${curr.timeLastUpdateUnix}"></div>
+        <div data-th-text="'Time next update Unix:' + ${curr.timeNextUpdateUnix}"></div>
+        <div data-th-text="'Time next update Utc:' + ${curr.timeNextUpdateUnix}"></div>
+        <div data-th-text="'Conversion Rate:' + ${#numbers.formatDecimal(curr.conversionRate, 0, 'COMMA', 2, 'POINT')}"></div>
+    </div>
+    <form action="/index.html">
+        <button type="submit">Back</button>
+    </form>
+</body>
+
+</html>
