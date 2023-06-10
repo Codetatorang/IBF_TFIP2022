@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Shopping Cart</h1>
+
+    <form action="/cart" method="POST">
+        <table>
+            <tr>
+                <td>Customer Name</td>
+                <td><input type="text" name="name"></td>
+            </tr>
+            <tr>
+                <td>Item</td>
+                <td><input type="text" name="item"></td>
+            </tr>
+            <tr>
+                <td>Quantity</td>
+                <td><input type="number" name="quantity" min="1" value="1"></td>
+            </tr>
+            <tr>
+                <td>Notes</td>
+                <td><input type="text" name="notes" default="No notes"></td>
+            </tr>
+            <tr>
+                <td><button type="submit">Add</button></td>
+            </tr>
+        </table>
+    </form>
+
+    <h2>Contents</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Description</th>
+                <th>Quantity</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr data-th-each="li:${orderDetails}">
+                <td><span data-ta-text="${li.product}"></span></td>
+                <td><span data-ta-text="${li.quantity}"></span></td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="2">
+                    <form action="/checkout" method="POST">
+                        <button type="submit">Checkout</button>
+                    </form>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+</body>
+
+</html>
