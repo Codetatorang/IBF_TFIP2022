@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insert into SQL</title>
+</head>
+
+<body>
+    <h1>
+        Shopping Cart
+    </h1>
+    <form method="POST" action="/cart">
+        <table>
+            <tr>
+                <td>Customer Name</td>
+                <td><input type="text" name="name"></td>
+            </tr>
+            <tr>
+                <td>Item</td>
+                <td><input type="text" name="item"></td>
+            </tr>
+            <tr>
+                <td>Quantity</td>
+                <td><input type="number" name="quantity"></td>
+            </tr>
+            <tr>
+                <td>Notes</td>
+                <td><input type="text" name="notes" default="No notes"></td>
+            </tr>
+        </table>
+        <button type="submit">Submit</button>
+    </form>
+</body>
+
+</html>
