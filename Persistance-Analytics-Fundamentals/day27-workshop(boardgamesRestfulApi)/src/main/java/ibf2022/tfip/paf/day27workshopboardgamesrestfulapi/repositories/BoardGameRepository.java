@@ -10,7 +10,11 @@ import org.springframework.data.mongodb.core.aggregation.AggregationResults;
 import org.springframework.data.mongodb.core.aggregation.MatchOperation;
 import org.springframework.data.mongodb.core.aggregation.ProjectionOperation;
 import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
+
+import com.mongodb.client.result.UpdateResult;
 
 import ibf2022.tfip.paf.day27workshopboardgamesrestfulapi.models.Comments;
 import jakarta.json.Json;
@@ -38,7 +42,7 @@ public class BoardGameRepository {
 
         if (results.getMappedResults().isEmpty())
             return null;
-            
+
         JsonObject obj = Json.createObjectBuilder()
                 .add("user", user)
                 .add("comment", comment)
@@ -55,10 +59,31 @@ public class BoardGameRepository {
         return result;
     }
 
-    public Document updateReview(String user, String comment, int rating, int gid) {
+    public long updateReview(String cid, String comment, int rating) {
         // !todo implement method
-        // Document fetchedDocument = mongoTemplate.find
+        // ObjectId commend_id = new ObjectId(cid);
+
+        // Document commentResult = mongoTemplate.findById(commend_id, Document.class, COLLECTION_NAME_COMMENTS);
+
+        // if(null == commentResult)
+        //     return null;
+
         
-        return null;
+        JsonObject obj = Json.createObjectBuilder()
+                .add("comment", comment)
+                .add("rating", rating)
+                .add("posted", LocalDate.now().toString())
+                .build();
+
+        //create query
+        Query query = Query.query(Criteria.where("_id").is(cid));
+
+        // updateOperation
+        Update updateOps = new Update()
+                .push("edited", obj.toString());
+
+        UpdateResult result = mongoTemplate.updateFirst(query, updateOps, getClass(), COLLECTION_NAME_COMMENTS);
+
+        return result.getMatchedCount();
     }
 }

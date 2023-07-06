@@ -4,7 +4,6 @@ import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.MultiValueMap;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -12,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import ibf2022.tfip.paf.day27workshopboardgamesrestfulapi.models.EditedComments;
 import ibf2022.tfip.paf.day27workshopboardgamesrestfulapi.serivces.BoardGameService;
 
 @RestController
@@ -36,21 +36,29 @@ public class BoardGameController {
 
     }
 
-    @Validated
-    @PutMapping("{review_id}")
-    public ResponseEntity<String> updateComments(@RequestBody MultiValueMap<String, String> comment,
-            @PathVariable int id) {
-        // todo implement method
-        int rating = Integer.parseInt(comment.getFirst("rating"));
-
+    @PutMapping("/{review_id}")
+    public ResponseEntity<String> updateComments(@RequestBody EditedComments comment,
+            @PathVariable("review_id") String id) {
+        int rating = comment.getRating();
+        String commentString = comment.getComment();
         // rating constraint
         if (rating > 10)
             rating = 10;
         else if (rating < 0)
             rating = 0;
 
+        //handle empty comment
+        if(null == commentString)
+            commentString = "";
+
+        //proceed with update
+        long result = boardGameService.updateReview(id, commentString, rating);
+
+        // return bad request if cid does not exist
+        if (0 == result)
+            return ResponseEntity.badRequest().body("cid of: " + id + " does not exist");
+
         return ResponseEntity.ok("Update successful");
 
     }
-
 }

@@ -15,4 +15,8 @@ public class BoardGameService {
     public Document insertReview(String user, String comment, int rating, int gid) {
         return boardGameRepository.insertReview(user, comment, rating, gid);
     }
+
+    public long updateReview(String cid, String comment, int rating) {
+        return boardGameRepository.updateReview(cid, comment, rating);
+    }
 }
