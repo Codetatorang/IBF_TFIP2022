@@ -36,6 +36,9 @@ public class BoardGameRepository {
         //! execute pipeline
         AggregationResults<Comments> results = mongoTemplate.aggregate(pipeline, COLLECTION_NAME_GAMES, Comments.class);
 
+        if (results.getMappedResults().isEmpty())
+            return null;
+            
         JsonObject obj = Json.createObjectBuilder()
                 .add("user", user)
                 .add("comment", comment)
@@ -50,5 +53,12 @@ public class BoardGameRepository {
 
         Document result = mongoTemplate.insert(bsonDoc, COLLECTION_NAME_COMMENTS);
         return result;
+    }
+
+    public Document updateReview(String user, String comment, int rating, int gid) {
+        // !todo implement method
+        // Document fetchedDocument = mongoTemplate.find
+        
+        return null;
     }
 }
