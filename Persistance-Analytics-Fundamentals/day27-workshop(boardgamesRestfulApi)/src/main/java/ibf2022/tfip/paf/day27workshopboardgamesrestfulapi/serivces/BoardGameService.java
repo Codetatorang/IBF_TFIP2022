@@ -22,4 +22,8 @@ public class BoardGameService {
     public Document getCommentandRating(String rid) {
         return boardGameRepository.getCommentandRating(rid);
     }
+
+    public Document getCommentHistory(String rid) {
+        return boardGameRepository.getCommentHistory(rid);
+    }
 }

@@ -84,6 +84,26 @@ public class BoardGameRepository {
     }
 
     public Document getCommentandRating(String rid) {
+
+        Document fetchedDoc = getCommentHistory(rid);
+
+        // check for null
+        if (fetchedDoc == null)
+        return null;
+
+        // if document does not have edit field, return document with edit = false
+        if (!fetchedDoc.containsKey("edited")) {
+            fetchedDoc.put("isEdited", false);
+            return fetchedDoc;
+        }
+
+        // add json object to document
+        fetchedDoc.put("isEdited", true);
+        fetchedDoc.remove("edited");
+        return fetchedDoc; // to change
+    }
+
+    public Document getCommentHistory(String rid) {
         ObjectId id = new ObjectId(rid);
         Document fetchedDoc = mongoTemplate.findById(id, Document.class, COLLECTION_NAME_COMMENTS);
 
@@ -91,16 +111,15 @@ public class BoardGameRepository {
         if (fetchedDoc == null)
             return null;
 
-        //if document does not have edit field, return document with edit = false
+        // if document does not have edit field, return document with edit = false
         if (!fetchedDoc.containsKey("edited")) {
             fetchedDoc.put("isEdited", false);
             return fetchedDoc;
         }
         // extract array from document, get latest details, convert to string
         @SuppressWarnings("unchecked")
-        List<String> editedArray =  fetchedDoc.get("edited", List.class);
+        List<String> editedArray = fetchedDoc.get("edited", List.class);
         String latestDetails = editedArray.get(editedArray.size() - 1);
-        
 
         // convert string to json object
         JsonReader jsonReader = Json.createReader(new StringReader(latestDetails));
@@ -108,13 +127,10 @@ public class BoardGameRepository {
         jsonReader.close();
 
         // add json object to document
-        fetchedDoc.put("isEdited", true);
         fetchedDoc.put("comment", jsonObject.getString("comment"));
         fetchedDoc.put("rating", jsonObject.getInt("rating"));
-
+        fetchedDoc.put("timestamp", LocalDate.now().toString());
         System.out.println(fetchedDoc);
-        return fetchedDoc; // to change
+        return fetchedDoc;
     }
-
-    
 }
