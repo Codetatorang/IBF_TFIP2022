@@ -90,6 +90,12 @@ public class BoardGameRepository {
         // check for null
         if (fetchedDoc == null)
             return null;
+
+        //if document does not have edit field, return document with edit = false
+        if (!fetchedDoc.containsKey("edited")) {
+            fetchedDoc.put("isEdited", false);
+            return fetchedDoc;
+        }
         // extract array from document, get latest details, convert to string
         @SuppressWarnings("unchecked")
         List<String> editedArray =  fetchedDoc.get("edited", List.class);
@@ -102,10 +108,13 @@ public class BoardGameRepository {
         jsonReader.close();
 
         // add json object to document
+        fetchedDoc.put("isEdited", true);
         fetchedDoc.put("comment", jsonObject.getString("comment"));
         fetchedDoc.put("rating", jsonObject.getInt("rating"));
 
         System.out.println(fetchedDoc);
         return fetchedDoc; // to change
     }
+
+    
 }

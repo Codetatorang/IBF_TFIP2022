@@ -2,6 +2,7 @@ package ibf2022.tfip.paf.day27workshopboardgamesrestfulapi.controllers;
 
 import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -70,4 +71,12 @@ public class BoardGameController {
             return ResponseEntity.badRequest().body("comment with id of: " + rid + " does not exist");
         return ResponseEntity.ok(result.toString());
     }
+
+    @GetMapping(path = "{review_id}/history", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> getCommentHistory(@PathVariable("review_id") String rid){
+        //todo implement this method
+        return null;
+    }
+
+    
 }
