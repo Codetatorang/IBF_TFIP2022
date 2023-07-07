@@ -8,7 +8,6 @@ import ibf2022.tfip.paf.day27workshopboardgamesrestfulapi.repositories.BoardGame
 
 @Service
 public class BoardGameService {
-    // !todo implement method
     @Autowired
     private BoardGameRepository boardGameRepository;
 
@@ -18,5 +17,9 @@ public class BoardGameService {
 
     public long updateReview(String cid, String comment, int rating) {
         return boardGameRepository.updateReview(cid, comment, rating);
+    }
+
+    public Document getCommentandRating(String rid) {
+        return boardGameRepository.getCommentandRating(rid);
     }
 }

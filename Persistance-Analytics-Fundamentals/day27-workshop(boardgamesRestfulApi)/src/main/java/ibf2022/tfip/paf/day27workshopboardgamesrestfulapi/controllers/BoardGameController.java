@@ -4,6 +4,7 @@ import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.MultiValueMap;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -60,5 +61,13 @@ public class BoardGameController {
 
         return ResponseEntity.ok("Update successful");
 
+    }
+
+    @GetMapping("{review_id}")
+    public ResponseEntity<String> getLatestCommentRating(@PathVariable("review_id") String rid){
+        Document result = boardGameService.getCommentandRating(rid);
+        if(null == result)
+            return ResponseEntity.badRequest().body("comment with id of: " + rid + " does not exist");
+        return ResponseEntity.ok(result.toString());
     }
 }

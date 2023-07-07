@@ -14,4 +14,5 @@ public class Comments {
     private int gid;
     private Date posted;
     private String name;
+    private String[] edited;
 }
