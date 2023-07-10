@@ -13,7 +13,7 @@ public class WeatherController {
     
         //request param method
         @GetMapping
-        public String getWeather(@RequestParam(required = true) String city, @RequestParam(name="units", defaultValue = "kilometers") String units, Model model){
+        public String getWeather(@RequestParam(required = true) String city, @RequestParam(defaultValue = "kilometers") String units, Model model){
             model.addAttribute("city", city);
             model.addAttribute("units", units);
             return "weather";
@@ -21,7 +21,7 @@ public class WeatherController {
     
         //path variable method 
         @GetMapping("{country}")
-        public String getWeather2(@PathVariable(name="country",required = true) String city, @RequestParam(name="units", defaultValue = "kilometers") String units, Model model){
+        public String getWeather2(@PathVariable(name="country",required = true) String city, @RequestParam(defaultValue = "kilometers") String units, Model model){
             model.addAttribute("city", city);
             model.addAttribute("units", units);
             return "weather";

@@ -52,7 +52,7 @@ public class EmployeeController {
     }
 
     @GetMapping("/updateemployee/{email}")
-    public String updateEmployee(@PathVariable("email") String email, Model model){
+    public String updateEmployee(@PathVariable String email, Model model){
         Employee employee = employeeSvc.findByEmail(email);
         model.addAttribute("employee",employee);
         return "updateemployee";
@@ -68,7 +68,7 @@ public class EmployeeController {
     }
 
     @GetMapping("/deleteemployee/{email}")
-    public String deleteEmployee(@PathVariable("email") String email, Model model) throws FileNotFoundException{
+    public String deleteEmployee(@PathVariable String email, Model model) throws FileNotFoundException{
         Employee employee = employeeSvc.findByEmail(email);
         employeeSvc.delete(employee);
         employeeSvc.save();

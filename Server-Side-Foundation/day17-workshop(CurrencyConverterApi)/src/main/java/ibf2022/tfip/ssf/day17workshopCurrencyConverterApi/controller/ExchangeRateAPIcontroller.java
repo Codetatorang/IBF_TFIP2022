@@ -23,8 +23,8 @@ public class ExchangeRateAPIcontroller {
     private ExchangeRateApiService exchangeRateApiSvc;
 
     @GetMapping
-    public String resultsPage(@RequestParam("baseCode") String baseCode,
-            @RequestParam("targetCode") String targetCode, Model model) {
+    public String resultsPage(@RequestParam String baseCode,
+            @RequestParam String targetCode, Model model) {
         Optional<Currency> currOpt = exchangeRateApiSvc.getConversion(baseCode,
                 targetCode);
         model.addAttribute("curr", currOpt.get());

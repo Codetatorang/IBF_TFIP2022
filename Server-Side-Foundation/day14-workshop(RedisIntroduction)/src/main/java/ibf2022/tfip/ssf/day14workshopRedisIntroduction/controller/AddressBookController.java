@@ -42,7 +42,7 @@ public class AddressBookController {
     }
 
     @GetMapping("/contact")
-    public String getAllContact(Model model, @RequestParam(name = "startIndex") Integer startIndex) {
+    public String getAllContact(Model model, @RequestParam Integer startIndex) {
         List<Contact> contactList = addressBookService.findAllContacts(startIndex);
         logger.info("contact list size : %d".formatted(contactList.size()));
         model.addAttribute("contacts", contactList);
@@ -50,7 +50,7 @@ public class AddressBookController {
     }
 
     @GetMapping("/contact/{contactId}")
-    public String getContactDetails(Model model, @PathVariable("contactId") String contactId){
+    public String getContactDetails(Model model, @PathVariable String contactId){
         Contact contact = addressBookService.findById(contactId);
         model.addAttribute("contact", contact);
         return "contact";
