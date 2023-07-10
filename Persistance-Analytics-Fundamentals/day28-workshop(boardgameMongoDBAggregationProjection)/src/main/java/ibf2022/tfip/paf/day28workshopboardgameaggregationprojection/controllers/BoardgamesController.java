@@ -1,5 +1,7 @@
 package ibf2022.tfip.paf.day28workshopboardgameaggregationprojection.controllers;
 
+import java.util.Optional;
+
 import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -31,19 +33,16 @@ public class BoardgamesController {
     }
 
     @GetMapping("{rating}")
-    public ResponseEntity<Document> getGamesByRanking(@PathVariable("rating") String rating) {
-        Document doc = new Document("tst", "test"); // todo: remove when done
+    public ResponseEntity<String> getGamesByRanking(@PathVariable("rating") String rating) {
+        Optional<String> docContainer = boardgamesSerivce.getGamesByRating(rating);
 
-        switch(rating){
-            case "highest":
-            break;
-            case "lowest":
-            break;
-            default:
-            break;
-
+        if(docContainer.isEmpty()){
+            Document doc = new Document("message", "an error has occured");
+            // return ResponseEntity.status(HttpStatus.NOT_FOUND).body(doc);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(doc.toString());
         }
+        
 
-        return ResponseEntity.ok(doc);
+        return ResponseEntity.ok(docContainer.get());
     }
 }
