@@ -1,0 +1,24 @@
+<div class="div-border">
+    <h2>Calculator App</h2>
+    <form [formGroup]="inputForm" (click)="onSubmit()">
+        <label for="input1">Input 1: </label>
+        <input type="number" formControlName="num1" id="input1">
+        <br><br>
+        <label for="sign">Sign: </label>
+        <input type="text" formControlName="sign" id="sign">
+        <div class="red-error-msg" *ngIf="inputForm.get('sign')?.hasError('required')">
+            Please enter a valid sign
+        </div>
+        <br><br>
+        <label for="input2">Input 2: </label>
+        <input type="number" formControlName="num2" id="input2">
+
+        <br><br>
+        <button type="submit">Add</button>
+    </form>
+
+</div>
+<div class="div-border">
+    <h2>Answer</h2>
+    <p>{{ result }}</p>
+</div>
