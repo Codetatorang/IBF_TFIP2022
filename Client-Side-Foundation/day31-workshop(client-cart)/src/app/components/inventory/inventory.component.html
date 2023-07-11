@@ -1,0 +1,9 @@
+
+<div>
+    <h1 style="text-align: center;">Please Select</h1>
+    <div class="div-border" *ngFor="let fruit of fruits;">
+        <img src="https://dummyimage.com/50x50/ffffff/ff0000.png&text= + {{ fruit }}" alt="">
+        <span>{{ fruit }}</span>
+        <button type="button" value="{{ fruit }}" #button (click)="addFruitToCart(button)">add</button>
+    </div>
+</div>   

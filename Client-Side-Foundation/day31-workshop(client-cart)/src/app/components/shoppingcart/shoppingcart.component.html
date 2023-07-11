@@ -1,0 +1,8 @@
+<div>
+    <h1 style="text-align: center;">Please Select</h1>
+    <div class="div-border" *ngFor="let fruit of cartList| keyvalue">
+        <img src="https://dummyimage.com/50x50/ffffff/ff0000.png&text= + {{ fruit.key }}" alt="">
+        <span>{{ fruit.key }}, quantity: {{ fruit.value }}</span>
+        <button type="button" value="{{ fruit.key }}" #button (click)="deleteFruit(button)">Delete</button>
+    </div>
+</div>
