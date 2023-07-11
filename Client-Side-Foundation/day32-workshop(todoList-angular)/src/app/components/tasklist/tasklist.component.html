@@ -1,0 +1,9 @@
+<h1>Task</h1>
+
+<div border="1" *ngFor="let task of taskList | async">
+    <div class="div-border">
+        <h3>{{ task.description }}</h3>
+        <p>{{ task.priority }}</p>
+        <span>{{ task.due }} </span>
+    </div>
+</div>

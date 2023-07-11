@@ -1,0 +1,27 @@
+<h1>ToDo</h1>
+
+<form [formGroup]="form">
+    <label class="label-main" for="description">Description</label> &nbsp;
+    <input name="description" type="text" formControlName="description">
+
+    <br><br>
+
+    <div>
+        <label class="label-main" for="priorty">Priority </label> &nbsp;
+        <label class="label-main" for="high">High</label>
+        <input id="high" value="high" type="radio" formControlName="priority">
+        <label class="label-main" for="medium">Medium</label>
+        <input id="medium" value="medium" type="radio" formControlName="priority">
+        <label class="label-main" for="low">Low</label>
+        <input id="low" value="low" type="radio" formControlName="priority">
+    </div>
+
+    <br>
+
+    <label class="label-main" for="due">Due </label> &nbsp;
+    <input name="due" id="due" type="date" formControlName="due">
+
+    <br>
+    <button class="buttonloc" type="submit" (click)="addtoTodo()">Add</button>
+</form> 
+
