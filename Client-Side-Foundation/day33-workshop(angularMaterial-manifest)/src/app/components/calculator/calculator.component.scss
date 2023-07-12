@@ -1,0 +1,21 @@
+.div-border{
+    //size and positino
+    width: 50%;
+    // position: fixed;
+    margin-left: 20%;
+    margin-top: 5%;
+    // place-items: center;
+
+
+    //border
+    border-style: solid;
+    border-color: black;
+    border-width: 1px;
+
+    padding: 2% 2%;
+}
+
+.red-error-msg{
+    color: red;
+    font-size: 12px;
+}
