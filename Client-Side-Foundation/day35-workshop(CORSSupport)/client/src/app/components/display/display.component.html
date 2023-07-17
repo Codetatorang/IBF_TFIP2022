@@ -1,0 +1,16 @@
+<div class="div-container">
+    <h3>games per page</h3>
+        <select class="flex-right" [(ngModel)]="pp">
+            <option value="3">3</option>
+            <option value="5">5</option>
+            <option value="8">8</option>
+            <option value="10">10</option>
+          </select>
+    <ul>
+        <li *ngFor="let names of gameList | paginate:{itemsPerPage: pp, currentPage: p}">{{ names }}</li>
+    </ul>
+
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    <!-- <mat-paginator [pageSizeOptions]="[4,5,8]" showFirstLastButtons="true"a -->
+    <!-- to change to using mongodb data -->
+</div>
