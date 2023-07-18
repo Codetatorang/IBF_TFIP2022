@@ -1,0 +1,16 @@
+<div class="div-border"> 
+    <form [formGroup]="form" (submit)="addToList()">
+        <label for="city">City:</label>
+        &nbsp;
+        <input type="text" matInput formControlName="city">
+        &nbsp;
+        <button type="submit">Add</button>
+    </form>
+    <br>
+    <!-- <div *ngFor="let city of cityList">
+        <div class="div-border" value="city" #citybutton (click)="printCity(citybutton)">{{ city }}</div>
+    </div> -->
+    <a *ngFor="let city of cityList" [routerLink]="['/details', city]">
+        {{ city }} <br>
+    </a>
+</div>
