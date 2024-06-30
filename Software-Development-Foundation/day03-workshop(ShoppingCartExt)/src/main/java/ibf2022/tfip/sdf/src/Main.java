@@ -69,10 +69,11 @@ public class Main {
                     // List of all files and directories
                     String contents[] = directoryPath.list();
                     System.out.println("List of files and directories in the specified directory:");
-                    for (int i = 0; i < contents.length; i++) {
-                        System.out.println(contents[i]);
-                    }
+                for (String content : contents) {
+                    System.out.println(content);
+                }
                     break;
+
                 case "add":
                     sc.add(input, dirPath, stringLogin);
                     break;

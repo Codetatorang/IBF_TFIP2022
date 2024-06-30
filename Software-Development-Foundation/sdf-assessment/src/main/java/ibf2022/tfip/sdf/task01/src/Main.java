@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
+
     public static void main(String[] args) throws FileNotFoundException, IOException {
         String fileName = args[0];
         String dirPath = System.getProperty("user.dir");
@@ -21,9 +22,9 @@ public class Main {
 
         // variables
         String readString, strippedString;
-        Integer counts = 0;
+        Integer counts;
         Integer totalwords = 0;
-        Map<String, Integer> wordMap = new HashMap<String, Integer>();
+        Map<String, Integer> wordMap = new HashMap<>();
 
         try {
             while ((readString = br.readLine()) != null) {
@@ -39,13 +40,14 @@ public class Main {
                     } else {
                         counts += 1;
                     }
-                    if (!word.isBlank())
+                    if (!word.isBlank()) {
                         wordMap.put(word, counts);
+                    }
                 }
             }
 
             // sort and print
-            List<Map.Entry<String, Integer>> entrySetList = new LinkedList<Map.Entry<String, Integer>>(
+            List<Map.Entry<String, Integer>> entrySetList = new LinkedList<>(
                     wordMap.entrySet());
             // sort through the list
             Collections.sort(entrySetList, (map1, map2) -> map2.getValue().compareTo(map1.getValue()));
@@ -53,11 +55,11 @@ public class Main {
             // print out the top 10 results
             for (int i = 0; i < 10; i++) {
                 Float termFreq = ((float) entrySetList.get(i).getValue() / totalwords);
-                System.out.printf("word [%s] occured [%d] with a frequency count of [%.3f]\n", entrySetList.get(i).getKey(), entrySetList.get(i).getValue(),termFreq);
+                System.out.printf("word [%s] occured [%d] with a frequency count of [%.3f]\n", entrySetList.get(i).getKey(), entrySetList.get(i).getValue(), termFreq);
             }
 
         } catch (IOException ex) {
-            ex.printStackTrace();
+            System.err.println(ex);
         } finally {
             br.close();
         }

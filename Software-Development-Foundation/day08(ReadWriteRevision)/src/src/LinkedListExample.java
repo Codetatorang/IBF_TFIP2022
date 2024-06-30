@@ -5,7 +5,7 @@ import java.util.LinkedList;
 //this is a linkedlist example
 public class LinkedListExample {
     public void example(){
-        LinkedList<String> ll = new LinkedList<String>();
+        LinkedList<String> ll = new LinkedList<>();
         ll.add("A");
         ll.add("B");
         ll.add("C");

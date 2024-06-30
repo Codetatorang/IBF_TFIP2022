@@ -52,22 +52,16 @@ public class CatInTheHat {
             System.exit(1);
         }
 
-        FileReader fr = new FileReader(cith);
-        BufferedReader br = new BufferedReader(fr);
-
-        FileWriter writer = new FileWriter("../data/CAPS-CAT-IN-THE-HAT.txt");
-        String line;
-
-        while (null != (line = br.readLine())) {
-            writer.write(line.toUpperCase());
-            writer.write("\n");
+        FileWriter writer;
+        try (FileReader fr = new FileReader(cith); BufferedReader br = new BufferedReader(fr)) {
+            writer = new FileWriter("../data/CAPS-CAT-IN-THE-HAT.txt");
+            String line;
+            while (null != (line = br.readLine())) {
+                writer.write(line.toUpperCase());
+                writer.write("\n");
+            }  System.out.println("write to file completed.");
+            // close the reader
         }
-
-        System.out.println("write to file completed.");
-
-        // close the reader
-        br.close();
-        fr.close();
 
         // close the writer
         writer.flush();

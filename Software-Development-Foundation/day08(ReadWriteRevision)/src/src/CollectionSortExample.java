@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 public class CollectionSortExample {
     public void example(){
-        List<Integer> numbers = new ArrayList<Integer>();
+        List<Integer> numbers = new ArrayList<>();
 
         for(int i =0; i<10; i++){
             numbers.add((int) (Math.random() * 100));
@@ -35,7 +35,7 @@ public class CollectionSortExample {
         Employee emp2 = new Employee(12345, "Gionne", "SS", "Advisor", "test2@gmail.com",10000);
         Employee emp3 = new Employee(12345, "Fionne", "SS", "Advisor", "test3@gmail.com",15000);
 
-        List<Employee> employees = new ArrayList<Employee>();
+        List<Employee> employees = new ArrayList<>();
         employees.add(emp1);
         employees.add(emp2);
         employees.add(emp3);

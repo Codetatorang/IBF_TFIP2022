@@ -13,14 +13,11 @@ public final class App {
 	public static void main(String[] args) {
 
 		//threads with runnable
-		Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                for (int i = 0; i < 5; i++) {
-                    System.out.println(Thread.currentThread().getName() + "\tRunnable..." + i);
-                }
-            };
-        });
+		Thread thread = new Thread(() -> {
+                    for (int i = 0; i < 5; i++) {
+                        System.out.println(Thread.currentThread().getName() + "\tRunnable..." + i);
+                    }
+                });
         thread.start();
 
 		MyRunnableImplementation mRI = new MyRunnableImplementation("Task 1");
@@ -51,7 +48,7 @@ public final class App {
 		System.out.println(">> Subtraction: " + minus.process(1, 1));
 		messageString.printMessage("Its time for lunch!");
 
-		List<Employee> employees = new ArrayList<Employee>();
+		List<Employee> employees = new ArrayList<>();
 		
 		//generate employees
 		employees.add(new Employee(1,"Tony", "Stark", 12500));

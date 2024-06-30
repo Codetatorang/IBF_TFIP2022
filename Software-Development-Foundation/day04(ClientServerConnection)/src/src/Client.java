@@ -20,36 +20,31 @@ public class Client {
         if (0 == port){
             port = 3000;
         }else{
-           port = Integer.parseInt(args[0]);
+           port = Integer.valueOf(args[0]);
         }
 
-        Socket clientConn = new Socket("127.0.0.1", port);
-
-        System.out.printf("Connected to server on localhost:%d\n", port);
-
-        //Console
-        Console cons = System.console();
-        String line = cons.readLine("What would like to uppercase? ");
-
-        //Do something
-        //Get the output stream to write to the server.
-        OutputStream os = clientConn.getOutputStream();
-        ObjectOutputStream oos = new ObjectOutputStream(os);
-
-        
-        Writer wr = new OutputStreamWriter(os);
-        oos.writeUTF(line);
-        oos.flush();
-
-        // get the input stream from the server
-        InputStream is = clientConn.getInputStream();
-        Reader r = new InputStreamReader(is);
-        BufferedReader br = new BufferedReader(r);
-        String returnedString = br.readLine();
-        System.out.printf("your message %s is converted into %s:\n ", line, returnedString);
-
-        //Close connection
-        clientConn.close();
+        ObjectOutputStream oos;
+        Writer wr;
+        try (Socket clientConn = new Socket("127.0.0.1", port)) {
+            System.out.printf("Connected to server on localhost:%d\n", port);
+            //Console
+            Console cons = System.console();
+            String line = cons.readLine("What would like to uppercase? ");
+            //Do something
+            //Get the output stream to write to the server.
+            OutputStream os = clientConn.getOutputStream();
+            oos = new ObjectOutputStream(os);
+            wr = new OutputStreamWriter(os);
+            oos.writeUTF(line);
+            oos.flush();
+            // get the input stream from the server
+            InputStream is = clientConn.getInputStream();
+            Reader r = new InputStreamReader(is);
+            BufferedReader br = new BufferedReader(r);
+            String returnedString = br.readLine();
+            System.out.printf("your message %s is converted into %s:\n ", line, returnedString);
+            //Close connection
+        }
         wr.close();
         oos.close();
     }

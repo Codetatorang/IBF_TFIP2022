@@ -1,9 +1,9 @@
 package src;
 
 public class Card {
-    private String suit;
-    private Integer value;
-    private String name;
+    private final String suit;
+    private final Integer value;
+    private final String name;
 
     public Card(String suit, Integer value, String name){
         this.suit = suit;

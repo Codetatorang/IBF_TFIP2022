@@ -25,10 +25,7 @@ public class HashMapExample {
         while (!searchString.equals("quit")) {
             searchString = cons.readLine("Enter searchString: ");
             if (phones.containsKey(searchString)) {
-                System.out.println(searchString + "-" + phones.get(searchString));
-              
-            }else{
-                continue;
+                System.out.println(searchString + "-" + phones.get(searchString)); 
             }
         }
     }

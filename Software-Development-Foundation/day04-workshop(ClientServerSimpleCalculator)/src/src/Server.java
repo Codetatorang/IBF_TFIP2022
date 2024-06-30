@@ -21,43 +21,28 @@ public class Server {
                 // wait for a connection
                 System.out.println("Waiting for connection.");
 
-                Socket conn = server.accept();
-                System.out.println("Connection established.");
-
-                // inputstream
-                InputStream is = conn.getInputStream();
-                ObjectInputStream ois = new ObjectInputStream(is);
-
-                String input = ois.readUTF();
-                System.out.printf("%s\n", input);
-
-                // do calculations
-                String eq[] = input.trim().split(" ");
-                float ans = 0f;
-
-                switch (eq[1]) {
-                    case "+":
-                        ans = Float.parseFloat(eq[0]) + Float.parseFloat(eq[2]);
-                        break;
-                    case "-":
-                        ans = Float.parseFloat(eq[0]) - Float.parseFloat(eq[2]);
-                        break;
-                    case "*":
-                        ans = Float.parseFloat(eq[0]) * Float.parseFloat(eq[2]);
-                        break;
-                    case "/":
-                        ans = Float.parseFloat(eq[0]) / Float.parseFloat(eq[2]);
-                        break;
+                try (Socket conn = server.accept()) {
+                    System.out.println("Connection established.");
+                    // inputstream
+                    InputStream is = conn.getInputStream();
+                    ObjectInputStream ois = new ObjectInputStream(is);
+                    String input = ois.readUTF();
+                    System.out.printf("%s\n", input);
+                    // do calculations
+                    String eq[] = input.trim().split(" ");
+                    float ans = 0f;
+                    switch (eq[1]) {
+                        case "+" -> ans = Float.parseFloat(eq[0]) + Float.parseFloat(eq[2]);
+                        case "-" -> ans = Float.parseFloat(eq[0]) - Float.parseFloat(eq[2]);
+                        case "*" -> ans = Float.parseFloat(eq[0]) * Float.parseFloat(eq[2]);
+                        case "/" -> ans = Float.parseFloat(eq[0]) / Float.parseFloat(eq[2]);
+                    }   // write back to client
+                    OutputStream os = conn.getOutputStream();
+                    ObjectOutputStream oos = new ObjectOutputStream(os);
+                    oos.writeUTF(Float.toString(ans));
+                    oos.flush();
+                    // close the connection
                 }
-
-                // write back to client
-                OutputStream os = conn.getOutputStream();
-                ObjectOutputStream oos = new ObjectOutputStream(os);
-
-                oos.writeUTF(Float.toString(ans));
-                oos.flush();
-                // close the connection
-                conn.close();
             }
         }
     }

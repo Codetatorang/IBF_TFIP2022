@@ -10,7 +10,7 @@ public class BankAccount{
     private String name = "";
     private String accountNum = "";
     private Float accountBal = 0.f;
-    private List<String> transactions = new LinkedList<String>();
+    private List<String> transactions = new LinkedList<>();
     private boolean closed = false;
     private String accountCreatedDate = "";
     private String accountClosedDate = "";
@@ -22,7 +22,7 @@ public class BankAccount{
         //format datetime to dd/mm/yyyy format
         LocalDate date = LocalDate.now();
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd MM yyyy");
-        this.accountCreatedDate = date.format(dtf).toString();
+        this.accountCreatedDate = date.format(dtf);
     }
     public BankAccount(String name, float bal){
         this.name = name;
@@ -31,7 +31,7 @@ public class BankAccount{
         //format datetime to dd/mm/yyyy format
         LocalDate date = LocalDate.now();
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd MM yyyy");
-        this.accountCreatedDate = date.format(dtf).toString();
+        this.accountCreatedDate = date.format(dtf);
     }
 
     //members
@@ -39,7 +39,7 @@ public class BankAccount{
     public String getAccountNum() {return accountNum;}
     
     public Float getAccountBal() {return accountBal;}
-    public void setAccountBal(Float accountBal) {this.accountBal = accountBal;}
+    private void setAccountBal(Float accountBal) {this.accountBal = accountBal;}
 
     public List<String> getTransactions() {return transactions;}
     public void setTransactions(List<String> transactions) {this.transactions = transactions;}
@@ -64,7 +64,7 @@ public class BankAccount{
             //convert datetime to local format
             LocalDateTime dateTime = LocalDateTime.now();
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy h.m.sa");
-            String formattedDateTime = dateTime.format(dtf).toString();
+            String formattedDateTime = dateTime.format(dtf);
             //store this transaction into transactions list
             String message  = String.format("Sucessfully deposited $%.2f at %s\n",amt,formattedDateTime);
             transactions.add(message);
@@ -86,7 +86,7 @@ public class BankAccount{
 
             LocalDateTime dateTime = LocalDateTime.now();
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy h.m.sa");
-            String formattedDateTime = dateTime.format(dtf).toString();
+            String formattedDateTime = dateTime.format(dtf);
             //store this transaction into transactions list
             String message  = String.format("Sucessfully withdrawed $%.2f at %s\n",amt,formattedDateTime);
             transactions.add(message);
@@ -99,5 +99,9 @@ public class BankAccount{
                 System.err.printf("Cannot withdraw %.2f, You are left with only %.2f in your account.\n", amt,accountBal);}
             else{System.err.println("Encountered exeception: " + ex);}
         }
+    }
+
+    public void setAccountNum(String accountNum) {
+        this.accountNum = accountNum;
     }
 }

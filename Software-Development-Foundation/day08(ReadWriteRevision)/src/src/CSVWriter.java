@@ -11,13 +11,13 @@ public class CSVWriter {
 
     private static final String FILE_HEADER = "staffNo,fullName,department,role,emailAddress,salary";
 
-    String dirPath = ".//data";
-    String fileName = "data.txt";
+    // String dirPath = ".//data";
+    // String fileName = "data.txt";
 
     public List<Employee> employees = null;
 
     public List<Employee> generateEmployees() {
-        employees = new ArrayList<Employee>();
+        employees = new ArrayList<>();
 
         // create some employees
         Employee emp1 = new Employee(12345, "Dionne", "SS", "Advisor", "test1@gmail.com", 20000);
@@ -33,21 +33,21 @@ public class CSVWriter {
     }
 
     public void writeToCSV(List<Employee> employees, String fileName)throws IOException{
-        FileWriter fw = new FileWriter(fileName);
-
         //write FILE_HEADER to csv
-        fw.append(FILE_HEADER.toString());
-        fw.append(NEWLINE_SEPERATOR);
+        try (FileWriter fw = new FileWriter(fileName)) {
+            //write FILE_HEADER to csv
+            fw.append(FILE_HEADER);
+            fw.append(NEWLINE_SEPERATOR);
+            
+            //read records ro wby row and write it to the file using fw.append()
 
-        //read records ro wby row and write it to the file using fw.append()
-
-        for (Employee e: employees) {
-            fw.append(e.toString()+ '\n');
+            for (Employee e: employees) {
+                fw.append(e.toString()+ '\n');
+            }
+            
+            //flush and close the file writer
+            fw.flush();
         }
-
-        //flush and close the file writer
-        fw.flush();
-        fw.close();
 
     }
 

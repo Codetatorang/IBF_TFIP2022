@@ -6,7 +6,7 @@ import java.util.List;
 
 public class ShoppingCart {
     public static void main(String[] args) {
-        List<String> cartItems = new ArrayList<String>();
+        List<String> cartItems = new ArrayList<>();
 
         // message
         System.out.println("Welcome to your shopping cart");
@@ -22,7 +22,7 @@ public class ShoppingCart {
             String inputArr[] = inputString.toLowerCase().trim().split(" ");
 
             switch (inputArr[0]) {
-                case "list":
+                case "list" -> {
                     if (cartItems.isEmpty()) {
                         System.out.println("Your cart is empty");
                         break;
@@ -31,28 +31,28 @@ public class ShoppingCart {
                     for (int i = 0; i < cartItems.size(); i++) {
                         System.out.printf("%d. %s\n", i + 1, cartItems.get(i));
                     }
-                    break;
-                case "add":
+                }
+                case "add" -> {
                     if (inputArr.length < 2) {
                         System.out.println("Please specify something to add");
                         continue;
                     }
                     for (int i = 1; i < inputArr.length; i++) {
-                        if (cartItems.size() > 0 && cartItems.contains(inputArr[i])) {
+                        if (!cartItems.isEmpty() && cartItems.contains(inputArr[i])) {
                             System.out.printf("You have %s in your cart\n", inputArr[i]);
                             continue;
                         }
                         cartItems.add(inputArr[i]);
                         System.out.printf("%s added to cart\n", inputArr[i]);
                     }
-                    break;
-                case "delete":
+                }
+                case "delete" -> {
                     if (inputArr.length < 2) {
                         System.out.println("Please specify an index to delete\n");
                         continue;
                     }
                     try{
-                        Integer index = Integer.parseInt(inputArr[1]);
+                        Integer index = Integer.valueOf(inputArr[1]);
                         if (index > cartItems.size()) {
                             System.out.println("Number not in list\n");
                             break;
@@ -63,13 +63,12 @@ public class ShoppingCart {
                         System.out.println("Please enter the index instead of the word");
                         continue;
                     }
-                    break;
-                case "exit":
+                }
+                case "exit" -> {
                     System.out.println("exiting from programme");
                     exit = true;
-                    break;
-                default:
-                    System.out.println("Please enter either 'list', 'add' , 'delete' or 'exit");
+                }
+                default -> System.out.println("Please enter either 'list', 'add' , 'delete' or 'exit");
             }
         }
 

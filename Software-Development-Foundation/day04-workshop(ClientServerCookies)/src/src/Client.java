@@ -19,25 +19,26 @@ public class Client {
         Socket socket = new Socket("localhost", Integer.parseInt(args[0]));
         try (OutputStream os = socket.getOutputStream()) {
             BufferedOutputStream bos = new BufferedOutputStream(os);
-            DataOutputStream dos = new DataOutputStream(bos);
-
-            Console cons = System.console();
-            String readInput = "";
-            String response = "";
-            InputStream is = socket.getInputStream();
-            BufferedInputStream bis = new BufferedInputStream(is);
-            DataInputStream dis = new DataInputStream(bis);
-
-            while (!readInput.equalsIgnoreCase("exit")) {
-                readInput = cons.readLine("Enter a command (try 'get-cookie'): ");
-                dos.writeUTF(readInput);
-                dos.flush();
-                response = dis.readUTF();
-                System.out
-                        .println(response.substring(0, 1).toUpperCase()
-                                + response.substring(1, response.length()) + " cookie received.");
+            InputStream is;
+            BufferedInputStream bis;
+            DataInputStream dis;
+            try (DataOutputStream dos = new DataOutputStream(bos)) {
+                Console cons = System.console();
+                String readInput = "";
+                String response;
+                is = socket.getInputStream();
+                bis = new BufferedInputStream(is);
+                dis = new DataInputStream(bis);
+                while (!readInput.equalsIgnoreCase("exit")) {
+                    readInput = cons.readLine("Enter a command (try 'get-cookie'): ");
+                    dos.writeUTF(readInput);
+                    dos.flush();
+                    response = dis.readUTF();
+                    System.out
+                            .println(response.substring(0, 1).toUpperCase()
+                                    + response.substring(1, response.length()) + " cookie received.");
+                }
             }
-            dos.close();
             dis.close();
             bis.close();
             is.close();

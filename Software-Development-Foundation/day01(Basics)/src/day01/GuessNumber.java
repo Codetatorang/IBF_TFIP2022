@@ -23,7 +23,7 @@ public class GuessNumber {
         // Go into the main loop
         while ((tries > 0) && (!win)) {
             String input = cons.readLine("What is your guess (%d)\n", tries);
-            Integer num = Integer.parseInt(input.trim());
+            Integer num = Integer.valueOf(input.trim());
 
             if (num > toGuess) {
                 System.out.println("Lower");

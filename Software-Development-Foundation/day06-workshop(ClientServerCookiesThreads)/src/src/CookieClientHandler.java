@@ -12,6 +12,7 @@ import java.io.OutputStream;
 import java.net.Socket;
 
 public class CookieClientHandler implements Runnable {
+
     private Socket s = new Socket();
 
     public CookieClientHandler(Socket s) {
@@ -37,15 +38,9 @@ public class CookieClientHandler implements Runnable {
 
         Boolean exit = false;
         // returns a random cookie
-        try (InputStream is = s.getInputStream()) {
-            BufferedInputStream bis = new BufferedInputStream(is);
-            DataInputStream dis = new DataInputStream(bis);
+        try (InputStream is = s.getInputStream(); BufferedInputStream bis = new BufferedInputStream(is); DataInputStream dis = new DataInputStream(bis); OutputStream os = s.getOutputStream(); BufferedOutputStream bos = new BufferedOutputStream(os); DataOutputStream dos = new DataOutputStream(bos);) {
 
-            OutputStream os = s.getOutputStream();
-            BufferedOutputStream bos = new BufferedOutputStream(os);
-            DataOutputStream dos = new DataOutputStream(bos);
-
-            String messageReceived = "";
+            String messageReceived;
 
             while (!exit) {
                 messageReceived = dis.readUTF();
@@ -67,7 +62,7 @@ public class CookieClientHandler implements Runnable {
             dos.close();
 
         } catch (IOException ex) {
-            ex.printStackTrace();
+            System.err.println(ex);
         }
     }
 

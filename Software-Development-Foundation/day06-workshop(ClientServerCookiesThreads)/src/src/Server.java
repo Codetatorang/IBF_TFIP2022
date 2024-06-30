@@ -26,21 +26,20 @@ public class Server {
         if (args.length > 0)
             port = Integer.parseInt(args[0]);
 
-        // enabling of threads
-        ServerSocket ss = new ServerSocket(port);
-        ExecutorService executorService = Executors.newCachedThreadPool();
-
-        while (!exit) {
-            System.out.println("Waiting for Connection...");
-            Socket s = ss.accept();
-            System.out.println("Connection Received...");
-            CookieClientHandler cch = new CookieClientHandler(s);
-            executorService.execute(cch);
-
-            if(exit)
-                s.close();
+        try ( // enabling of threads
+                ServerSocket ss = new ServerSocket(port)) {
+            ExecutorService executorService = Executors.newCachedThreadPool();
+            
+            while (!exit) {
+                System.out.println("Waiting for Connection...");
+                Socket s = ss.accept();
+                System.out.println("Connection Received...");
+                CookieClientHandler cch = new CookieClientHandler(s);
+                executorService.execute(cch);
+                
+                if(exit)
+                    s.close();
+            }
         }
-
-        ss.close();
     }
 }

@@ -3,11 +3,11 @@ package ibf2022.tfip.sdf.task02.src;
 import java.io.Console;
 
 public class Main {
+
     public static void main(String[] args) {
         System.out.println("Welcome.");
         Boolean quit = false;
-        Float result;
-        Float lastResult = 0.f;
+        Float result = 0.0f;
         Float op1, op2;
         Console cons = System.console();
 
@@ -22,15 +22,24 @@ public class Main {
                 continue;
             }
 
-            if (operations[0].equalsIgnoreCase("$last")) {
-                op1 = lastResult;
-            } else if (operations[2].equalsIgnoreCase("$last")) {
-                op2 = lastResult;
+            //if input is just last 
+            if (input.equalsIgnoreCase("$last")) {
+                System.out.println(result);
+                continue;
             }
 
             try {
-                op1 = Float.parseFloat(operations[0]);
-                op2 = Float.parseFloat(operations[2]);
+                //converts $last to value
+                if (operations[0].equalsIgnoreCase("$last")) {
+                    op1 = result;
+                    op2 = Float.valueOf(operations[2]);
+                } else if (operations[2].equalsIgnoreCase("$last")) {
+                    op1 = Float.valueOf(operations[0]);
+                    op2 = result;
+                } else {
+                    op1 = Float.valueOf(operations[0]);
+                    op2 = Float.valueOf(operations[2]);
+                }
 
             } catch (NumberFormatException e) {
                 System.out.println("you've given a wrong expression!");
@@ -38,44 +47,40 @@ public class Main {
             }
 
             switch (operations[1]) {
-                case "+":
+                case "+" -> {
                     result = addOps(op1, op2);
                     if (result % 1 == 0) {
                         System.out.println(Math.round(result));
                     } else {
                         System.out.printf("%.2f\n", result);
                     }
-                    break;
-                case "-":
-                    minusOps(op1, op2);
-                    result = addOps(op1, op2);
+                }
+                case "-" -> {
+                    result = minusOps(op1, op2);
                     if (result % 1 == 0) {
                         System.out.println(Math.round(result));
                     } else {
                         System.out.printf("%.2f\n", result);
                     }
-                    break;
-                case "/":
-                    divideOps(op1, op2);
-                    result = addOps(op1, op2);
+                }
+                case "/" -> {
+                    result = divideOps(op1, op2);
                     if (result % 1 == 0) {
                         System.out.println(Math.round(result));
                     } else {
                         System.out.printf("%.2f\n", result);
                     }
-                    break;
-                case "*":
-                    timesOps(op1, op2);
-                    result = addOps(op1, op2);
+                }
+                case "*" -> {
+                    result = timesOps(op1, op2);
                     if (result % 1 == 0) {
                         System.out.println(Math.round(result));
                     } else {
                         System.out.printf("%.2f\n", result);
                     }
-                    break;
-                default:
-                    System.out.println("You've entereed an invalid expression!");
-                    break;
+                }
+                default ->
+                    System.out.println("You've entered an invalid expression! " + operations[1]);
             }
 
         }

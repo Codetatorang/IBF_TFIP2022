@@ -16,7 +16,7 @@ public class Cookies {
     List<String> cookieItems = null;
 
     public void readCookieFile() throws FileNotFoundException, IOException {
-        cookieItems = new ArrayList<String>();
+        cookieItems = new ArrayList<>();
         File file = new File(dirPath + File.separator + fileName);
         BufferedReader br = new BufferedReader(new FileReader(file));
 
@@ -26,7 +26,6 @@ public class Cookies {
                 cookieItems.add(readString);
             }
         } catch (IOException ex) {
-            ex.printStackTrace();
         }finally{
             br.close();
         }

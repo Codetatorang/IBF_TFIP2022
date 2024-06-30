@@ -14,8 +14,8 @@ public class Client {
         Socket conn = new Socket("localhost", 3000);
         System.out.println("Connected to server on localhost: 3000");
 
-        String ans = "";
-        String eq = "";
+        String ans;
+        String eq;
 
         try {
             while (true) {
@@ -44,9 +44,7 @@ public class Client {
                 // output the answer
                 System.out.printf("Answer is: %s.\n", ans);
             }
-        } catch (IOException e) {
-            System.err.println(e);
-        } catch (ArrayIndexOutOfBoundsException e) {
+        } catch (IOException | ArrayIndexOutOfBoundsException e) {
             System.err.println(e);
         }
     }

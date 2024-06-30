@@ -18,26 +18,22 @@ public class Server {
     while(true){
             //wait for a connection
             System.out.println("Waiting incoming connection");
-            Socket conn = server.accept();
-            
+        try (Socket conn = server.accept()) {
             System.out.println("Connection connected.");
             //Do something
             //Get the input stream, read the data from the client
             InputStream is = conn.getInputStream();
             ObjectInputStream ois = new ObjectInputStream(is);
-
             String input = ois.readUTF();
             System.out.printf(">> from client: %s\n", input);
             input = input.toUpperCase();
             System.out.printf(">> to client: %s\n", input);
-
             OutputStream os = conn.getOutputStream();
             Writer w = new OutputStreamWriter(os);
             w.write(input);
             w.flush();
-
             //Close the connection
-            conn.close();
+        }
             server.close();
         }
     

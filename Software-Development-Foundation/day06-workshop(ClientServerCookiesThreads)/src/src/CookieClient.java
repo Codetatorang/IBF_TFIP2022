@@ -32,41 +32,41 @@ public class CookieClient {
         try (OutputStream os = socket.getOutputStream()) {
             System.out.println("Connected to server.");
 
-            InputStream is = socket.getInputStream();
-            BufferedInputStream bis = new BufferedInputStream(is);
-            DataInputStream dis = new DataInputStream(bis);
-            BufferedOutputStream bos = new BufferedOutputStream(os);
-            DataOutputStream dos = new DataOutputStream(bos);
-
-            Console cons = System.console();
-            String readInput = "";
-            String response = "";
-
-            while (!exit) {
-                readInput = cons.readLine("Enter a command (try 'cookie'): ");
-                
-                //exit if input is 'exit'
-                if(readInput.equalsIgnoreCase("exit")){
-                    exit = true;
-                    continue;
+            BufferedInputStream bis;
+            DataInputStream dis;
+            try (InputStream is = socket.getInputStream()) {
+                bis = new BufferedInputStream(is);
+                dis = new DataInputStream(bis);
+                DataOutputStream dos;
+                try (BufferedOutputStream bos = new BufferedOutputStream(os)) {
+                    dos = new DataOutputStream(bos);
+                    Console cons = System.console();
+                    String readInput;
+                    String response;
+                    while (!exit) {
+                        readInput = cons.readLine("Enter a command (try 'cookie'): ");
+                        
+                        //exit if input is 'exit'
+                        if(readInput.equalsIgnoreCase("exit")){
+                            exit = true;
+                            continue;
+                        }
+                        
+                        //send response to server
+                        dos.writeUTF(readInput);
+                        dos.flush();
+                        
+                        //receive response from server
+                        response = dis.readUTF();
+                        System.out
+                                .println(response.substring(0, 1).toUpperCase()
+                                        + response.substring(1, response.length()) + " cookie received.");
+                        
+                        
+                    }   os.close();
                 }
-
-                //send response to server
-                dos.writeUTF(readInput);
-                dos.flush();
-
-                //receive response from server
-                response = dis.readUTF();
-                System.out
-                        .println(response.substring(0, 1).toUpperCase()
-                                + response.substring(1, response.length()) + " cookie received.");
-                
-
+                dos.close();
             }
-            os.close();
-            bos.close();
-            dos.close();
-            is.close();
             bis.close();
             dis.close();
 
