@@ -1,5 +1,6 @@
 package ibf2022.tfip.ssf.day17revisionworkshopShoppingCart.controller;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,12 +22,11 @@ public class CartHiddenFormsFieldController {
         String item = form.getFirst("item");
         String previousCart = form.getFirst("previousCart");
 
-        List<String> cart = new LinkedList<String>();
+        List<String> cart = new LinkedList<>();
 
         if (null != previousCart) {
             String[] items = previousCart.split(",");
-            for (String i : items)
-                cart.add(i);
+            cart.addAll(Arrays.asList(items));
         }
 
         cart.add(item);

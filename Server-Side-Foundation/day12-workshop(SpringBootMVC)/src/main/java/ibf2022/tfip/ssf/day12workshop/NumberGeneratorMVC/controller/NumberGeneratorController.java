@@ -22,14 +22,14 @@ public class NumberGeneratorController {
     
     @PostMapping("/postednumber")
     public String generateNumber(@RequestParam(name = "inputNumber", defaultValue = "1") Integer units, Model model){
-        List<Integer> integerList = new ArrayList<Integer>();
+        List<Integer> integerList = new ArrayList<>();
         Integer loopVal = units;
         Integer currentVal = 1;
         while (currentVal <= loopVal){
             int result = (int)(Math.random() * loopVal) + 1;
 
-            if (!integerList.contains(Integer.valueOf(result))) {
-                integerList.add(Integer.valueOf(result));
+            if (!integerList.contains(result)) {
+                integerList.add(result);
                 currentVal+=1;
             }
         }

@@ -25,24 +25,24 @@ public class PayloadController {
     @PostMapping
     public ResponseEntity<Payload> save(@RequestBody Payload payload) {
         Payload pload = payloadSvc.save(payload);
-        return new ResponseEntity<Payload>(pload, HttpStatus.OK);
+        return new ResponseEntity<>(pload, HttpStatus.OK);
     }
 
     @GetMapping
     public ResponseEntity<List<Payload>> findAll(){
         List<Payload> payloadList = payloadSvc.findAll();
-        return new ResponseEntity<List<Payload>>(payloadList, HttpStatus.OK);
+        return new ResponseEntity<>(payloadList, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Payload> findPayloadById(@PathVariable Integer id){
         Payload pload = payloadSvc.findPayloadById(id);
-        return new ResponseEntity<Payload>(pload, HttpStatus.OK);
+        return new ResponseEntity<>(pload, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deletePayloadById(@PathVariable Integer id){
         String result = payloadSvc.deletePayloadById(id);
-        return new ResponseEntity<String>(result, HttpStatus.OK);
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 }

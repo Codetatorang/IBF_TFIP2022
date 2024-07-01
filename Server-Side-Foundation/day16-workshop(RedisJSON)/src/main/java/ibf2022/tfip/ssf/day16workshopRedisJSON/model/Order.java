@@ -11,7 +11,7 @@ public class Order {
     private String name;
     private String email;
     private String deliveryDate;
-    private List<LineItem> lineItems = new LinkedList<LineItem>();
+    private List<LineItem> lineItems = new LinkedList<>();
 
     public String getOrderId() { return orderId;}
     public void setOrderId(String orderId) { this.orderId = orderId;}

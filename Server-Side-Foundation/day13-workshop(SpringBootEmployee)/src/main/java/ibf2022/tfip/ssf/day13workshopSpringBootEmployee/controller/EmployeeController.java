@@ -3,8 +3,6 @@ package ibf2022.tfip.ssf.day13workshopSpringBootEmployee.controller;
 import java.io.FileNotFoundException;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,7 +23,7 @@ public class EmployeeController {
     @Autowired
     EmployeeService employeeSvc;
 
-    Logger logger = LoggerFactory.getLogger(EmployeeController.class);
+    // final static Logger logger = LoggerFactory.getLogger(EmployeeController.class);
 
     @GetMapping("/home")
     public String employeeListPage(Model model) {

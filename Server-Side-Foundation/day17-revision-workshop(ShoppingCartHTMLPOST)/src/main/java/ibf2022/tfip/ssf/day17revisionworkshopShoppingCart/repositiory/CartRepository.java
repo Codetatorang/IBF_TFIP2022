@@ -14,7 +14,7 @@ public class CartRepository {
 
     public void addToCart(String name, String cart){
         System.out.printf("added to cart: %s, %s \n", name, cart);
-        redisTemplate.opsForValue().set(name, cart);;
+        redisTemplate.opsForValue().set(name, cart);
     }
 
     public Optional<String> getFromCart(String name) {

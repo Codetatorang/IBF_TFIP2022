@@ -49,7 +49,7 @@ public class RSVPController {
     public ResponseEntity<String> postAsForm(@RequestBody MultiValueMap<String, String> form) {
 
         String name = form.getFirst("name");
-        Boolean attending = Boolean.parseBoolean(form.getFirst("attending"));
+        Boolean attending = Boolean.valueOf(form.getFirst("attending"));
 
         logger.info("attending: %b".formatted(attending));
 

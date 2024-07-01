@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class Day17WorkshopCurrencyConverterApiApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(Day17WorkshopCurrencyConverterApiApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(Day17WorkshopCurrencyConverterApiApplication.class, args);
+    }
 
 }

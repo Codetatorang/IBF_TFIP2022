@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping(path={"/","/index.html"}, produces = MediaType.TEXT_HTML_VALUE)
 public class ImageController {
-    Logger logger  = Logger.getLogger(ImageController.class.getName());
+    static final Logger logger  = Logger.getLogger(ImageController.class.getName());
 
     @GetMapping
     public String getRandomNumber(Model model) {

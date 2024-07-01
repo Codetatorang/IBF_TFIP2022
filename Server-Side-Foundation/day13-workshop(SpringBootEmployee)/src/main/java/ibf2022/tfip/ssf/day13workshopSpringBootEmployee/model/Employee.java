@@ -1,6 +1,7 @@
 package ibf2022.tfip.ssf.day13workshopSpringBootEmployee.model;
 
 import java.util.Date;
+import java.util.Objects;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -15,8 +16,8 @@ import jakarta.validation.constraints.PastOrPresent;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
-
 public class Employee {
+
     @NotEmpty(message = "First name is required")
     @Size(min = 3, max = 60, message = "First name must be at least 3 characters to maximum 60 characters")
     private String firstName;
@@ -38,40 +39,79 @@ public class Employee {
     @Max(value = 400000, message = "Max salary 400000")
     private Integer salary;
 
-    @DateTimeFormat(pattern="yyyy-MM-dd")
-    @PastOrPresent(message="Birth date cannot be greater than today.")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @PastOrPresent(message = "Birth date cannot be greater than today.")
     private Date birthDate;
 
     private String address;
 
-    @NotNull(message="Cannot be empty")
-    @Digits(fraction=0,integer=6,message="Postal code format, i.e 123456")
+    @NotNull(message = "Cannot be empty")
+    @Digits(fraction = 0, integer = 6, message = "Postal code format, i.e 123456")
     private Integer postalCode;
 
-    
-    public String getFirstName() {return firstName;}
-    public void setFirstName(String firstName) {this.firstName = firstName;}
+    public String getFirstName() {
+        return firstName;
+    }
 
-    public String getLastName() {return lastName;}
-    public void setLastName(String lastName) {this.lastName = lastName;}
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
 
-    public String getEmail() {return email;}
-    public void setEmail(String email) {this.email = email;}
+    public String getLastName() {
+        return lastName;
+    }
 
-    public String getPhoneNumber() {return phoneNumber;}
-    public void setPhoneNumber(String phoneNumber) {this.phoneNumber = phoneNumber;}
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 
-    public Integer getSalary() {return salary;}
-    public void setSalary(Integer salary) {this.salary = salary;}
+    public String getEmail() {
+        return email;
+    }
 
-    public Date getBirthDate() {return birthDate;}
-    public void setBirthDate(Date birthDate) {this.birthDate = birthDate;}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-    public String getAddress() {return address;}
-    public void setAddress(String address) {this.address = address;}
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
 
-    public Integer getPostalCode() {return postalCode;}
-    public void setPostalCode(Integer postalCode) {this.postalCode = postalCode;}
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public Integer getSalary() {
+        return salary;
+    }
+
+    public void setSalary(Integer salary) {
+        this.salary = salary;
+    }
+
+    public Date getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(Date birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public Integer getPostalCode() {
+        return postalCode;
+    }
+
+    public void setPostalCode(Integer postalCode) {
+        this.postalCode = postalCode;
+    }
 
     public Employee() {
     }
@@ -89,48 +129,62 @@ public class Employee {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
+        }
         Employee other = (Employee) obj;
         if (firstName == null) {
-            if (other.firstName != null)
+            if (other.firstName != null) {
                 return false;
-        } else if (!firstName.equals(other.firstName))
+            }
+        } else if (!firstName.equals(other.firstName)) {
             return false;
+        }
         if (lastName == null) {
-            if (other.lastName != null)
+            if (other.lastName != null) {
                 return false;
-        } else if (!lastName.equals(other.lastName))
+            }
+        } else if (!lastName.equals(other.lastName)) {
             return false;
+        }
         if (email == null) {
-            if (other.email != null)
+            if (other.email != null) {
                 return false;
-        } else if (!email.equals(other.email))
+            }
+        } else if (!email.equals(other.email)) {
             return false;
+        }
         if (phoneNumber == null) {
-            if (other.phoneNumber != null)
+            if (other.phoneNumber != null) {
                 return false;
-        } else if (!phoneNumber.equals(other.phoneNumber))
+            }
+        } else if (!phoneNumber.equals(other.phoneNumber)) {
             return false;
-        if (salary != other.salary)
+        }
+        if (!Objects.equals(salary, other.salary)) {
             return false;
+        }
         if (birthDate == null) {
-            if (other.birthDate != null)
+            if (other.birthDate != null) {
                 return false;
-        } else if (!birthDate.equals(other.birthDate))
+            }
+        } else if (!birthDate.equals(other.birthDate)) {
             return false;
+        }
         if (address == null) {
-            if (other.address != null)
+            if (other.address != null) {
                 return false;
-        } else if (!address.equals(other.address))
+            }
+        } else if (!address.equals(other.address)) {
             return false;
-        if (postalCode != other.postalCode)
-            return false;
-        return true;
+        }
+        return Objects.equals(postalCode, other.postalCode);
     }
 
     @Override
@@ -147,7 +201,7 @@ public class Employee {
         result = prime * result + postalCode;
         return result;
     }
-    
+
     @Override
     public String toString() {
         return "Employee [firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", phoneNumber=" + phoneNumber + ", salary=" + salary + ", birthDate=" + birthDate + ", address=" + address + ", postalCode=" + postalCode + "]";

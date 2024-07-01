@@ -31,7 +31,7 @@ public class EmployeeRepo {
     public EmployeeRepo() throws ParseException{
         logger.info("employees created");
         if (null == employees){
-            employees = new ArrayList<Employee>();
+            employees = new ArrayList<>();
         }
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         Date dt = df.parse("1973-04-26");
@@ -60,10 +60,10 @@ public class EmployeeRepo {
     public void save() throws FileNotFoundException{
         File f = new File(dirPath + File.separator + fileName);
         OutputStream os = new FileOutputStream(f);
-        PrintWriter pw = new PrintWriter(os);
-        pw.println(employees.toString());
-        pw.flush();
-        pw.close();
+        try (PrintWriter pw = new PrintWriter(os)) {
+            pw.println(employees.toString());
+            pw.flush();
+        }
     }
 
     public Boolean delete(Employee employee){

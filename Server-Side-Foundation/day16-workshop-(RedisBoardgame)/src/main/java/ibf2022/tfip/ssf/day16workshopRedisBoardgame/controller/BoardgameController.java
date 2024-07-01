@@ -23,7 +23,7 @@ public class BoardgameController {
     @PostMapping
     public ResponseEntity<Boardgame> save(@RequestBody Boardgame boardgame) {
         Boardgame bg = boardgameSvc.save(boardgame);
-        return new ResponseEntity<Boardgame>(bg, HttpStatus.OK);
+        return new ResponseEntity<>(bg, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
@@ -31,14 +31,14 @@ public class BoardgameController {
         Boardgame bg = boardgameSvc.findBoardgameById(id);
 
         if (null == bg)
-            return new ResponseEntity<Boardgame>(bg, HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(bg, HttpStatus.NOT_FOUND);
         else
-            return new ResponseEntity<Boardgame>(bg, HttpStatus.OK);
+            return new ResponseEntity<>(bg, HttpStatus.OK);
     }
 
     @PutMapping
     public ResponseEntity<Boardgame> update(@RequestBody Boardgame boardgame) {
         Boardgame bg = boardgameSvc.update(boardgame);
-        return new ResponseEntity<Boardgame>(bg, HttpStatus.OK);
+        return new ResponseEntity<>(bg, HttpStatus.OK);
     }
 }

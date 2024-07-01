@@ -2,8 +2,6 @@ package ibf2022.tfip.ssf.day17workshopCurrencyConverterApi.controller;
 
 import java.util.Optional;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,7 +15,7 @@ import ibf2022.tfip.ssf.day17workshopCurrencyConverterApi.service.ExchangeRateAp
 @Controller
 @RequestMapping(path = "/pair")
 public class ExchangeRateAPIcontroller {
-    Logger logger = LoggerFactory.getLogger(ExchangeRateAPIcontroller.class);
+    // Logger logger = LoggerFactory.getLogger(ExchangeRateAPIcontroller.class);
 
     @Autowired
     private ExchangeRateApiService exchangeRateApiSvc;

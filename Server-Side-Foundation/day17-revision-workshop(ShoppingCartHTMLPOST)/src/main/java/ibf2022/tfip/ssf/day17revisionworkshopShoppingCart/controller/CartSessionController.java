@@ -3,8 +3,6 @@ package ibf2022.tfip.ssf.day17revisionworkshopShoppingCart.controller;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,7 +18,7 @@ import jakarta.servlet.http.HttpSession;
 public class CartSessionController {
 
     //logger for debugging
-    Logger logger = LoggerFactory.getLogger(CartSessionController.class);
+    // Logger logger = LoggerFactory.getLogger(CartSessionController.class);
 
     @PostMapping(path = "/checkout", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     public String checkout(@RequestBody MultiValueMap<String, String> form, Model model, HttpSession session) {
@@ -52,7 +50,7 @@ public class CartSessionController {
         List<String> cart = (List<String>) session.getAttribute("cart");
         if (null == cart) {
             
-            cart = new LinkedList<String>();
+            cart = new LinkedList<>();
             session.setAttribute("cart", cart);
             session.setAttribute("name", name);
         }

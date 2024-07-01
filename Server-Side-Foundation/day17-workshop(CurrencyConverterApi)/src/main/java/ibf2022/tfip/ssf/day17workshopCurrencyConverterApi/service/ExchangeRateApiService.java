@@ -35,7 +35,7 @@ public class ExchangeRateApiService {
                 .build();
 
         RestTemplate restTemplate  = new RestTemplate();
-        ResponseEntity<String> resp = null;
+        ResponseEntity<String> resp;
 
         String payload = "";
         int statusCode = 0;

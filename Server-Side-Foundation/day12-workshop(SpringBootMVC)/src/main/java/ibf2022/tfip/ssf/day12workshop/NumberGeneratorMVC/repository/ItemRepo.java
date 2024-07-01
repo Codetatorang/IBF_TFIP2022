@@ -12,7 +12,7 @@ public class ItemRepo {
     private List<Item> itemList;
 
     public List<Item> getCartItems(){
-        itemList = new ArrayList<Item>();
+        itemList = new ArrayList<>();
 
         //populate the list
         Item item = new Item();

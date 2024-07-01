@@ -1,5 +1,6 @@
 package ibf2022.tfip.ssf.day17revisionworkshopShoppingCart.service;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -27,7 +28,7 @@ public class CartService {
     public List<String> getFromCart(String name) {
         Optional<String> opt = cartRepository.getFromCart(name);
 
-        List<String> cart = new LinkedList<String>();
+        List<String> cart = new LinkedList<>();
 
         //if box is empty, return an empty list
         if(opt.isEmpty())
@@ -37,9 +38,7 @@ public class CartService {
         String value = opt.get();
         String[] items = value.split(",");
 
-        for(String i:items){
-            cart.add(i);
-        }
+        cart.addAll(Arrays.asList(items));
 
         return cart;
         

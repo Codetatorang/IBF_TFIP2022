@@ -12,7 +12,7 @@ public class CountryRepo {
     private List<Country> countries;
 
     public List<Country> getAllCountries() {
-        countries = new ArrayList<Country>();
+        countries = new ArrayList<>();
 
         //populate the countries list
         Country country = new Country("SG", "Singapore", 6000000);
@@ -32,7 +32,7 @@ public class CountryRepo {
 
     public boolean createCountry(Country country) {
         if (null == countries) {
-            countries = new ArrayList<Country>();
+            countries = new ArrayList<>();
         }
         countries.add(country);
         return true;

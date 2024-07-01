@@ -18,8 +18,8 @@ public class AppConfig {
     @Value("${spring.redis.port}")
     private int redisPort;
 
-    @Value("${spring.redis.database}")
-    private int redisDatabse;
+    // @Value("${spring.redis.database}")
+    // private int redisDatabse;
 
     @Bean("my-redis")
     public RedisTemplate<String, String> createRedisTemplate() {
